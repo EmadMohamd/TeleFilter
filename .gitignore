@@ -1,0 +1,5 @@
+user_config.json
+*.session
+build/
+dist/
+__pycache__/
