@@ -112,6 +112,41 @@ Credentials and the Telegram login are created when the app runs, in the same fo
 
 ---
 
+## Verify your download
+
+TeleFilter asks for your Telegram API credentials and creates a Telegram login on your computer, so it is worth checking that the program you run really comes from this source code.
+
+**Where to download:** only from this repository's **Releases** page. Anything else, including a copy with the same name on another site or fork, is not the official build.
+
+**Check a download** (takes under a minute):
+
+1. Install the [GitHub CLI](https://cli.github.com). It may ask you to sign in once with `gh auth login`.
+2. In the folder with the download, run:
+
+   ```
+   gh attestation verify TeleFilter-win64.zip --repo EmadMohamd/TeleFilter
+   ```
+
+   A successful result names this repository and the commit the file was built from. If it fails, do not run the file.
+3. Optional: compare the file's SHA-256 hash with `SHA256SUMS.txt` from the same release:
+
+   ```
+   Get-FileHash TeleFilter-win64.zip -Algorithm SHA256
+   ```
+
+   A matching hash only shows the download is intact. The attestation in step 2 is the stronger check.
+
+**Read the code:** the app talks only to Telegram. The network code is in `telegram_worker.py` and the sign-in flow is in `ui/main_window.py`. The release workflow shows exactly how the program is built.
+
+**Build it yourself:** if you prefer not to trust a prebuilt file, follow **Building a Windows exe** below, or run `python main.py` from source. Note that rebuilding produces a working but not byte-identical file, so the hashes will differ from the release.
+
+**Keep your login private:** `telefilter_session.session` gives full access to your Telegram account. Never share it, attach it to a bug report, or commit it to Git. If you ever shared it, log out of that session in Telegram (Settings, Devices) and delete the file. If you want extra caution, use a separate Telegram account.
+
+**Found a security problem?** Please report it privately using this repository's Security tab ("Report a vulnerability") instead of a public issue.
+
+---
+
+
 
 
 ## File Structure
